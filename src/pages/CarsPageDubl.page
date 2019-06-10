@@ -1,0 +1,138 @@
+<!--&lt;!&ndash;-->
+<!-- - Created by Alex on 01.06.2019.-->
+<!-- &ndash;&gt;-->
+<!--<apex:page id="CarsPage" controller="CarsController" cache="true">-->
+<!--    <apex:form>-->
+<!--        <apex:pageBlock id="Page" title="Cars Viewer">-->
+<!--            <apex:pageBlockSection id="CarsVies" title="Car Table" columns="1">-->
+<!--                <apex:pageBlockTable id="table" value="{!Cars}" var="cr">-->
+<!--                    <apex:column style="text-align:left">-->
+<!--                        <apex:commandLink value="Del" action="{!deleteCars}" reRender="CarsVies">-->
+<!--                            <apex:param name="cr.Brand__c" value="{!cr.Brand__c}" assignTo="{!brand}"/>-->
+<!--                            <apex:param name="cr.Model__c" value="{!cr.Model__c}" assignTo="{!model}"/>-->
+<!--                            <apex:param name="cr.Price__c" value="{!cr.Price__c}" assignTo="{!price}"/>-->
+<!--                            <apex:param name="cr.Year__c" value="{!cr.Year__c}" assignTo="{!year}"/>-->
+<!--                        </apex:commandLink>-->
+<!--                        <h1> | </h1>-->
+<!--                        <apex:commandLink value=" Edit" reRender="thePanelWrapper" action="{!openWindows}" id="save">-->
+<!--                            <apex:param name="cr.Brand__c" value="{!cr.Brand__c}" assignTo="{!brand}"/>-->
+<!--                            <apex:param name="cr.Model__c" value="{!cr.Model__c}" assignTo="{!model}"/>-->
+<!--                            <apex:param name="cr.Price__c" value="{!cr.Price__c}" assignTo="{!price}"/>-->
+<!--                            <apex:param name="cr.Year__c" value="{!cr.Year__c}" assignTo="{!year}"/>-->
+<!--                        </apex:commandLink>-->
+<!--                    </apex:column>-->
+<!--                    <apex:column id="Brand_id" Headervalue="Brand">-->
+<!--                        <apex:actionSupport event="ondblclick" action="{!editTrue}"-->
+<!--                                            reRender="EditBut,CancBut,Brand_id,Model_id,Price_id,Year_id "-->
+<!--                                            rendered="{!editWindow==false}">-->
+<!--                        </apex:actionSupport>-->
+<!--                        <apex:outputField value="{!cr.Brand__c}" style="text-align:left"-->
+<!--                                          rendered="{!editWindow==false}"/>-->
+<!--                        <apex:inputField id="inputBrand" value="{!cr.Brand__C}" rendered="{!editWindow==true}"/>-->
+<!--                    </apex:column>-->
+<!--                    <apex:column id="Model_id" Headervalue="Model">-->
+<!--                        <apex:actionSupport event="ondblclick" action="{!editTrue}"-->
+<!--                                            reRender="EditBut,CancBut,Brand_id,Model_id,Price_id,Year_id "-->
+<!--                                            rendered="{!editWindow==false}">-->
+<!--                            &lt;!&ndash;                            <apex:param name="cr.Brand__c" value="{!cr.Brand__c}" assignTo="{!brand}"/>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            <apex:param name="cr.Model__c" value="{!cr.Model__c}" assignTo="{!model}"/>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            <apex:param name="cr.Price__c" value="{!cr.Price__c}" assignTo="{!price}"/>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            <apex:param name="cr.Year__c" value="{!cr.Year__c}" assignTo="{!year}"/>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            <apex:param name="cr.Brand__c" value="{!cr.Brand__c}" assignTo="{!newBrand}"/>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            <apex:param name="cr.Model__c" value="{!cr.Model__c}" assignTo="{!newModel}"/>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            <apex:param name="cr.Price__c" value="{!cr.Price__c}" assignTo="{!newPrice}"/>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            <apex:param name="cr.Year__c" value="{!cr.Year__c}" assignTo="{!newYear}"/>&ndash;&gt;-->
+<!--                        </apex:actionSupport>-->
+<!--                        <apex:outputField value="{!cr.Model__c}" style="text-align:left"-->
+<!--                                          rendered="{!editWindow==false}"/>-->
+<!--                        <apex:inputField id="inputModel" value="{!cr.Model__c}" rendered="{!editWindow==true}"/>-->
+<!--                    </apex:column>-->
+<!--                    <apex:column id="Price_id" Headervalue="Price">-->
+<!--                        <apex:actionSupport event="ondblclick" action="{!editTrue}"-->
+<!--                                            reRender="EditBut,CancBut,Brand_id,Model_id,Price_id,Year_id "-->
+<!--                                            rendered="{!editWindow==false}">-->
+<!--                            &lt;!&ndash;                            <apex:param name="cr.Brand__c" value="{!cr.Brand__c}" assignTo="{!brand}"/>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            <apex:param name="cr.Model__c" value="{!cr.Model__c}" assignTo="{!model}"/>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            <apex:param name="cr.Price__c" value="{!cr.Price__c}" assignTo="{!price}"/>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            <apex:param name="cr.Year__c" value="{!cr.Year__c}" assignTo="{!year}"/>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            <apex:param name="cr.Brand__c" value="{!cr.Brand__c}" assignTo="{!newBrand}"/>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            <apex:param name="cr.Model__c" value="{!cr.Model__c}" assignTo="{!newModel}"/>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            <apex:param name="cr.Price__c" value="{!cr.Price__c}" assignTo="{!newPrice}"/>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            <apex:param name="cr.Year__c" value="{!cr.Year__c}" assignTo="{!newYear}"/>&ndash;&gt;-->
+<!--                        </apex:actionSupport>-->
+<!--                        <apex:outputField value="{!cr.Price__c}" style="text-align:left"-->
+<!--                                          rendered="{!editWindow==false}"/>-->
+<!--                        <apex:inputField id="inputPrice" value="{!cr.Price__c}" rendered="{!editWindow==true}"/>-->
+<!--                    </apex:column>-->
+<!--                    <apex:column id="Year_id" Headervalue="Year">-->
+<!--                        <apex:actionSupport event="ondblclick" action="{!editTrue}"-->
+<!--                                            reRender="EditBut,CancBut,Brand_id,Model_id,Price_id,Year_id"-->
+<!--                                            rendered="{!editWindow==false}">-->
+<!--                            <apex:param name="cr.Brand__c" value="{!cr.Brand__c}" assignTo="{!brand}"/>-->
+<!--                            <apex:param name="cr.Model__c" value="{!cr.Model__c}" assignTo="{!model}"/>-->
+<!--                            <apex:param name="cr.Price__c" value="{!cr.Price__c}" assignTo="{!price}"/>-->
+<!--                            <apex:param name="cr.Year__c" value="{!cr.Year__c}" assignTo="{!year}"/>-->
+<!--                            <apex:param name="cr.Brand__c" value="{!brand}" assignTo="{!newBrand}"/>-->
+<!--                            <apex:param name="cr.Model__c" value="{!model}" assignTo="{!newModel}"/>-->
+<!--                            <apex:param name="cr.Price__c" value="{!price}" assignTo="{!newPrice}"/>-->
+<!--                            <apex:param name="cr.Year__c" value="{!year}" assignTo="{!newYear}"/>-->
+<!--                        </apex:actionSupport>-->
+<!--                        <apex:outputField value="{!cr.Year__c}" style="text-align:left"-->
+<!--                                          rendered="{!editWindow==false}"/>-->
+<!--                        <apex:inputField id="inputYear" value="{!cr.Year__c}" rendered="{!editWindow==true}"/>-->
+<!--                        <apex:actionSupport>-->
+<!--                            <apex:param value="inputPrice" assignTo="{!newPrice}"/>-->
+<!--                            <apex:param value="inputYear" assignTo="{!newYear}"/>-->
+<!--                            <apex:param value="inputModel" assignTo="{!newModel}"/>-->
+<!--                            <apex:param value="inputBrand" assignTo="{!newBrand}"/>-->
+<!--                        </apex:actionSupport>-->
+<!--                        <apex:commandButton id="EditBut"-->
+<!--                                            image="{!URLFOR($Resource.confirmed)}"-->
+<!--                                            style="width:20px;height:20px;border:5px;"-->
+<!--                                            action="{!editCars}" reRender="CarsVies">-->
+<!--                        </apex:commandButton>-->
+<!--                        <apex:commandButton id="CancelBut"-->
+<!--                                            reRender="CarsVies,thePanelWrapper,EditCar,butt,CancBut,Brand_id,Model_id,Price_id,Year_id"-->
+<!--                                            image="{!URLFOR($Resource.cancel)}"-->
+<!--                                            style="width:20px;height:20px;border:5px;"-->
+<!--                                            action="{!editFalse}"/>-->
+<!--                    </apex:column>-->
+<!--                    &lt;!&ndash;                        <apex:actionSupport event="ondblclick" action="{!editTrue}"&ndash;&gt;-->
+<!--                    &lt;!&ndash;                                            reRender="butt,Brand_id,Model_id,Price_id,Year_id"&ndash;&gt;-->
+<!--                    &lt;!&ndash;                                            rendered="{!editWindow==false}"/>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        <apex:commandLink  value="save" action="{!editCars}" reRender="CarsVies">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                            <apex:param value="cr.Model__c" assignTo="{!model}"/>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                                                    <apex:commandButton id="EditBut" rendered="{!editWindow==true}"&ndash;&gt;-->
+<!--                    &lt;!&ndash;                                                                        image="{!URLFOR($Resource.confirmed)}"&ndash;&gt;-->
+<!--                    &lt;!&ndash;                                                                        style="width:20px;height:20px;border:5px;"&ndash;&gt;-->
+<!--                    &lt;!&ndash;                                                                        action="{!editCars2}" reRender="CarsVies">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                                                    </apex:commandButton>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        </apex:commandLink>&ndash;&gt;-->
+
+<!--                </apex:pageBlockTable>-->
+<!--            </apex:pageBlockSection>-->
+<!--            <apex:pageBlockButtons>-->
+<!--                <apex:commandButton value="New" action="https://c.eu26.visual.force.com/apex/AddCarsPage"/>-->
+<!--            </apex:pageBlockButtons>-->
+<!--        </apex:pageBlock>-->
+<!--        <apex:outputPanel id="thePanelWrapper">-->
+<!--            <apex:pageBlock id="EditCar" rendered="{!openWindow==true}" title="Edit Car">-->
+<!--                <apex:pageBlockSection title="Edit car" columns="2">-->
+<!--                    <apex:outputText label="Brand" value="{!brand}">-->
+<!--                    <apex:inputText label="New Brand" title="Enter new Brand to the car" value="{!newBrand}"/>-->
+<!--                    <apex:outputText label="Model" value="{!model}"/>-->
+<!--                    <apex:inputText label="New Model" title="Enter new Model to the car" value="{!newModel}"/>-->
+<!--                    <apex:outputText label="Price" value="{!price}"/>-->
+<!--                    <apex:inputText label="New Price" title="Enter new Price to the car" value="{!newPrice}"/>-->
+<!--                    <apex:outputText label="Year" value="{!year}"/>-->
+<!--                    <apex:inputText label="New Year" title="Enter new Year to the car" value="{!newYear}"/>-->
+<!--                </apex:pageBlockSection>-->
+<!--                <apex:pageBlockButtons>-->
+<!--                    <apex:commandButton action="{!editCars}" value="Save" reRender="CarsVies, thePanelWrapper"/>-->
+<!--                    <apex:commandButton action="{!closeWindows}" value="Close"-->
+<!--                                        reRender="CarsVies, thePanelWrapper"/>-->
+<!--                </apex:pageBlockButtons>-->
+<!--            </apex:pageBlock>-->
+<!--        </apex:outputPanel>-->
+<!--    </apex:form>-->
+<!--</apex:page>-->

@@ -1,0 +1,104 @@
+<!--
+ - Created by Alex on 01.06.2019.
+ -->
+<apex:page id="CarsPage" controller="CarsController">
+    <style type="text/css">
+        [id*=lowerTableEdit] td:empty {
+            display: none;
+        }
+    </style>
+    <apex:form>
+        <apex:pageBlock id="Page" title="Cars Viewer">
+            <apex:pageBlockSection id="CarsVies" title="Car Table" columns="1">
+                <apex:pageBlockTable id="table" value="{!carWrappers}" var="cr">
+                    <apex:column Headervalue="Action" style="text-align:left">
+                        <apex:commandButton reRender="table"
+                                            image="{!URLFOR($Resource.uninstall)}"
+                                            style="width:20px;height:20px;border:5px;"
+                                            rendered="{!NOT(cr.isEditMode)}"
+                                            action="{!cr.deleteCar}"/>
+                        <apex:commandButton reRender="lowerTableEdit"
+                                            image="{!URLFOR($Resource.pencil)}"
+                                            rendered="{!NOT(cr.isEditMode)}"
+                                            style="width:20px;height:20px;border:5px;"
+                                            action="{!cr.editTumblerMode}"/>
+                    </apex:column>
+                    <apex:column id="Brand_id" Headervalue="Brand">
+                        <apex:actionSupport event="ondblclick" action="{!cr.toggleEditMode}"
+                                            rendered="{!NOT(cr.isEditMode)}"
+                                            reRender="table,action_id"/>
+                        <apex:outputField rendered="{!NOT(cr.isEditMode)}" value="{!cr.car.Brand__c}"
+                                          style="text-align:left"/>
+                        <apex:inputField rendered="{!cr.isEditMode}" value="{!cr.car.Brand__c}"
+                                         style="text-align:left"/>
+                    </apex:column>
+                    <apex:column id="Model_id" Headervalue="Model">
+                        <apex:actionSupport event="ondblclick" action="{!cr.toggleEditMode}"
+                                            rendered="{!NOT(cr.isEditMode)}"
+                                            reRender="table,action_id"/>
+                        <apex:outputField rendered="{!NOT(cr.isEditMode)}" value="{!cr.car.Model__c}"
+                                          style="text-align:left"/>
+                        <apex:inputField rendered="{!cr.isEditMode}" value="{!cr.car.Model__c}"/>
+                    </apex:column>
+                    <apex:column id="Price_id" Headervalue="Price">
+                        <apex:actionSupport event="ondblclick" action="{!cr.toggleEditMode}"
+                                            rendered="{!NOT(cr.isEditMode)}"
+                                            reRender="table,action_id"/>
+                        <apex:outputField rendered="{!NOT(cr.isEditMode)}" value="{!cr.car.Price__c}"
+                                          style="text-align:left"/>
+                        <apex:inputField rendered="{!cr.isEditMode}" value="{!cr.car.Price__c}"/>
+                    </apex:column>
+                    <apex:column id="Year_id" Headervalue="Year" style="">
+                        <apex:actionSupport event="ondblclick" action="{!cr.toggleEditMode}"
+                                            rendered="{!NOT(cr.isEditMode)}"
+                                            reRender="table,action_id"/>
+                        <apex:outputField rendered="{!NOT(cr.isEditMode)}" value="{!cr.car.Year__c}"
+                                          style="text-align:left"/>
+                        <apex:inputField rendered="{!cr.isEditMode}" value="{!cr.car.Year__c}"/>
+                    </apex:column>
+                    <apex:column id="columnEdit">
+                        <apex:commandButton id="SaveEditButton"
+                                            image="{!URLFOR($Resource.confirmed)}"
+                                            style="width:20px;height:20px;border:5px;"
+                                            rendered="{!cr.isEditMode}"
+                                            action="{!cr.saveMe}" reRender="table">
+                        </apex:commandButton>
+                        <apex:commandButton id="CancelBut"
+                                            reRender="table"
+                                            image="{!URLFOR($Resource.cancel)}"
+                                            style="width:20px;height:20px;border:5px;"
+                                            rendered="{!cr.isEditMode}"
+                                            action="{!cr.toggleEditMode}"/>
+                    </apex:column>
+                </apex:pageBlockTable>
+                <apex:pageBlockTable style="empty-cells:hide; visibility:hidden;" columns="1" id="lowerTableEdit"
+                                     value="{!carWrappers}" var="cr">
+                    <apex:column rendered="{!cr.editCarsWindow}" style="visibility:visible;">
+                        <apex:pageBlock id="panelWrapper">
+                            <apex:pageBlockSection id="CarsEditionPanel"
+                                                   title="Edit car" columns="2">
+                                <apex:outputField label="Brand" value="{!cr.car.Brand__c}"/>
+                                <apex:inputField label="New Brand" value="{!cr.car.Brand__c}"/>
+                                <apex:outputField label="Model" value="{!cr.car.Model__c}"/>
+                                <apex:inputField label="New Model" value="{!cr.car.Model__c}"/>
+                                <apex:outputField label="Price" value="{!cr.car.Price__c}"/>
+                                <apex:inputField label="New Price" value="{!cr.car.Price__c}"/>
+                                <apex:outputField label="Year" value="{!cr.car.Year__c}"/>
+                                <apex:inputField label="New Year" value="{!cr.car.Year__c}"/>
+                            </apex:pageBlockSection>
+                            <apex:pageBlockButtons location="bottom">
+                                <apex:commandButton value="Save" action="{!cr.saveMe}"
+                                                    reRender="CarsVies"/>
+                                <apex:commandButton value="Cancel" action="{!cr.editTumblerMode}"
+                                                    reRender="CarsVies"/>
+                            </apex:pageBlockButtons>
+                        </apex:pageBlock>
+                    </apex:column>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons>
+                <apex:commandButton value="New" action="https://c.eu26.visual.force.com/apex/AddCarsPage"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
