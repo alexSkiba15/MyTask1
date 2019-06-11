@@ -4,10 +4,7 @@
 @SuppressWarnings('ApexUnresolvableReference')
 public with sharing class CarsController {
     public List<CarWrapperClass> carWrappers { get; set; }
-    public String model { get; set; }
-    public String brand { get; set; }
-    public Double price { get; set; }
-    public String year { get; set; }
+    public Car__c car { get; set; }
 
     public CarsController() {
         if (carWrappers == null) {
@@ -16,11 +13,19 @@ public with sharing class CarsController {
                 carWrappers.add(new CarWrapperClass(i));
             }
         }
+        car = new Car__c();
     }
-
-    public void addCar() {
-        Car__c car = new Car__c(Brand__c = brand, Model__c = model, Price__c = price, Year__c = year);
-        insert car;
+    public PageReference addCar2() {
+        try {
+            insert car;
+            PageReference pageReference = Page.CarsPage;
+            pageReference.setRedirect(true);
+            return pageReference;
+        } catch (Exception e) {
+            e.getMessage();
+            System.debug(e.getMessage());
+        }
+        return null;
     }
 
     class CarWrapperClass {
@@ -35,24 +40,42 @@ public with sharing class CarsController {
         }
 
         public PageReference deleteCar() {
-            delete car;
-            PageReference tempPage = Page.CarsPage;
-            tempPage.setRedirect(true);
-            return tempPage;
+            try {
+                delete car;
+                PageReference tempPage = Page.CarsPage;
+                tempPage.setRedirect(true);
+                return tempPage;
+            } catch (Exception e){
+                e.getMessage();
+                System.debug(e.getMessage());
+            }
+            return null;
         }
 
         public void saveMe() {
-            update car;
-            isEditMode = false;
-            editCarsWindow = false;
+            try {
+                update car;
+                isEditMode = false;
+                editCarsWindow = false;
+            } catch (Exception e) {
+                e.getMessage();
+                System.debug(e.getMessage());
+            }
         }
 
         public void editTumblerMode() {
             editCarsWindow = !editCarsWindow;
         }
 
-        public void toggleEditMode() {
-            isEditMode = !isEditMode;
+        public void toggleEditModeOn() {
+            isEditMode = true;
+        }
+
+        public PageReference toggleEditModeOff() {
+            isEditMode = false;
+            PageReference tempPage = Page.CarsPage;
+            tempPage.setRedirect(true);
+            return tempPage;
         }
     }
 }

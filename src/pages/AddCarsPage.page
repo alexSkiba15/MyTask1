@@ -6,13 +6,13 @@
     <apex:form>
         <apex:pageBlock title="Add Car">
             <apex:pageBlockSection rendered="true" title="Add Car" columns="1">
-                <apex:inputText label="Brand" value="{!brand}"/>
-                <apex:inputText label="Model" value="{!model}"/>
-                <apex:inputText label="Price" value="{!price}"/>
-                <apex:inputText label="Year" value="{!year}"/>
+                        <apex:inputField label="Brand" value="{!car.Brand__c}"/>
+                        <apex:inputField label="Model" value="{!car.Model__c}"/>
+                        <apex:inputField label="Price" value="{!car.Price__c}"/>
+                        <apex:inputField label="Year" value="{!car.Year__c}"/>
             </apex:pageBlockSection>
-            <apex:pageBlockButtons>
-                <apex:commandButton  value="Create" action="{!addCar}"/>
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton  value="Create" action="{!addCar2}" />
                 <apex:commandButton value="Back to cars table" action="https://c.eu26.visual.force.com/apex/CarsPage"/>
             </apex:pageBlockButtons>
         </apex:pageBlock>

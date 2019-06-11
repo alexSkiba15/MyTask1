@@ -24,7 +24,7 @@
                                             action="{!cr.editTumblerMode}"/>
                     </apex:column>
                     <apex:column id="Brand_id" Headervalue="Brand">
-                        <apex:actionSupport event="ondblclick" action="{!cr.toggleEditMode}"
+                        <apex:actionSupport event="ondblclick" action="{!cr.toggleEditModeOn}"
                                             rendered="{!NOT(cr.isEditMode)}"
                                             reRender="table,action_id"/>
                         <apex:outputField rendered="{!NOT(cr.isEditMode)}" value="{!cr.car.Brand__c}"
@@ -33,15 +33,16 @@
                                          style="text-align:left"/>
                     </apex:column>
                     <apex:column id="Model_id" Headervalue="Model">
-                        <apex:actionSupport event="ondblclick" action="{!cr.toggleEditMode}"
+                        <apex:actionSupport event="ondblclick" action="{!cr.toggleEditModeOn}"
                                             rendered="{!NOT(cr.isEditMode)}"
                                             reRender="table,action_id"/>
                         <apex:outputField rendered="{!NOT(cr.isEditMode)}" value="{!cr.car.Model__c}"
                                           style="text-align:left"/>
                         <apex:inputField rendered="{!cr.isEditMode}" value="{!cr.car.Model__c}"/>
                     </apex:column>
+
                     <apex:column id="Price_id" Headervalue="Price">
-                        <apex:actionSupport event="ondblclick" action="{!cr.toggleEditMode}"
+                        <apex:actionSupport event="ondblclick" action="{!cr.toggleEditModeOn}"
                                             rendered="{!NOT(cr.isEditMode)}"
                                             reRender="table,action_id"/>
                         <apex:outputField rendered="{!NOT(cr.isEditMode)}" value="{!cr.car.Price__c}"
@@ -49,7 +50,7 @@
                         <apex:inputField rendered="{!cr.isEditMode}" value="{!cr.car.Price__c}"/>
                     </apex:column>
                     <apex:column id="Year_id" Headervalue="Year" style="">
-                        <apex:actionSupport event="ondblclick" action="{!cr.toggleEditMode}"
+                        <apex:actionSupport event="ondblclick" action="{!cr.toggleEditModeOn}"
                                             rendered="{!NOT(cr.isEditMode)}"
                                             reRender="table,action_id"/>
                         <apex:outputField rendered="{!NOT(cr.isEditMode)}" value="{!cr.car.Year__c}"
@@ -61,14 +62,16 @@
                                             image="{!URLFOR($Resource.confirmed)}"
                                             style="width:20px;height:20px;border:5px;"
                                             rendered="{!cr.isEditMode}"
-                                            action="{!cr.saveMe}" reRender="table">
+                                            action="{!cr.saveMe}"
+                                            reRender="CarsVies">
+
                         </apex:commandButton>
                         <apex:commandButton id="CancelBut"
-                                            reRender="table"
+                                            reRender="CarsVies"
                                             image="{!URLFOR($Resource.cancel)}"
                                             style="width:20px;height:20px;border:5px;"
                                             rendered="{!cr.isEditMode}"
-                                            action="{!cr.toggleEditMode}"/>
+                                            action="{!cr.toggleEditModeOff}"/>
                     </apex:column>
                 </apex:pageBlockTable>
                 <apex:pageBlockTable style="empty-cells:hide; visibility:hidden;" columns="1" id="lowerTableEdit"
